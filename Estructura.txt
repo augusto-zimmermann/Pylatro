@@ -1,0 +1,7 @@
+Clase Joker
+    nombre
+    multiplicador
+    chips
+Clase Carta
+    numero
+    palo
