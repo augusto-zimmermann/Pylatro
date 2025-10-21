@@ -9,6 +9,8 @@ class Jugador():
     def comprar_joker(self,joker):
         if self.dinero >= joker.precio:
             listaJokers.append(joker)
+            self.dinero -= joker.precio
+            print(f"Compraste el joker {joker.nombre}")
         else:
             print("No podés comprarlo amigo")
 jugador1 = Jugador(4,cartas.cartas,listaJokers)

@@ -7,7 +7,6 @@ for i in range(len(palo)):
     for j in range(1,14):
         cartas.append((j,palo[i]))
         cartasOrigen.append(((j,palo[i])))
-# print(cartas)
 def mano():
     manoList =[]
     for i in range(8):
