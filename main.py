@@ -4,10 +4,10 @@ width = 1280
 height = 720
 screen = pygame.display.set_mode((width,height))
 prendido = True
-balatroFondo = pygame.image.load("wallpaper.jpeg").convert()
-balatroFondo = pygame.transform.scale(balatroFondo, (1280, 480)) 
+balatroFondo = pygame.image.load("media/img/wallpaper.jpeg").convert()
+balatroFondo = pygame.transform.scale(balatroFondo, (width, height)) 
 fuente = pygame.font.SysFont("Times New Roman", 30)
-pygame.mixer.music.load("balatro.mp3") 
+pygame.mixer.music.load("media/audio/balatro_orquesta.mp3") 
 pygame.mixer.music.play(-1, 0.0) 
 pygame.mixer.music.set_volume(1)
 x = 0
