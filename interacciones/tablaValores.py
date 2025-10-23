@@ -1,9 +1,3 @@
-class valoresDefault():
-  def __init__(self,chipsBase,multBase):
-    self.chipsBase = chipsBase
-    self.multBase = multBase
-  def seHaJugado():
-    pass
 def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
 
     valores = [x for x, y in manoJugada]
