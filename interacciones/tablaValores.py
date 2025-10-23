@@ -10,16 +10,16 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
     palos = [y for x, y in manoJugada]
 
     # Contar ocurrencias de cada valor
-    contarPar = {}
+    contarNums = {}
     for x in valores:
-        contarPar[x] = contarPar.get(x, 0) + 1
+        contarNums[x] = contarNums.get(x, 0) + 1 #cuenta la cantidad de veces que aparece un numero
 
     # Tipos de jugadas
-    hayPar = any(x == 2 for x in contarPar.values())
-    hay2Par = sum(1 for x in contarPar.values() if x == 2)
-    hayTrio = [x for x, c in contarPar.items() if c == 3]
-    hayPoker = [x for x, c in contarPar.items() if c == 4]
-    hayQuintillo = [x for x, c in contarPar.items() if c == 5]
+    hayPar = any(x == 2 for x in contarNums.values())
+    hay2Par = sum(1 for x in contarNums.values() if x == 2)
+    hayTrio = [x for x, c in contarNums.items() if c == 3]
+    hayPoker = [x for x, c in contarNums.items() if c == 4]
+    hayQuintillo = [x for x, c in contarNums.items() if c == 5]
     hayColor = any(palos.count(p) == 5 for p in palos)
     hayFull = (len(hayTrio) == 1 and hay2Par == 1)
     listaEsc = []
@@ -34,9 +34,9 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
     jugadas = {}
 
     if hayPar and hay2Par != 2:
-        jugadas["Par"] = (20 + sum(contarPar.keys())) * 2
+        jugadas["Par"] = (20 + sum(contarNums.keys())) * 2
     if hay2Par == 2 and not hayFull:
-        jugadas["Doble Par"] = (25 + sum(contarPar.keys())) * 2
+        jugadas["Doble Par"] = (25 + sum(contarNums.keys())) * 2
     if hayTrio:
         jugadas["Trio"] = (45 + sum(hayTrio)) * 3
     if hayPoker:
