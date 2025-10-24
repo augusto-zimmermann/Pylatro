@@ -10,7 +10,8 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
 
     # Tipos de jugadas
     hayPar = any(x == 2 for x in contarNums.values()) # any () devuelve booleano
-    hay2Par = sum(1 for x in contarNums.values() if x == 2)
+    hayParList = [x == 2 for x in contarNums.values()]
+    hay2Par = sum(1 for x in contarNums.values() if x == 2) # {1: 1, 4:2, 5:2}
     hayTrio = [x for x, c in contarNums.items() if c == 3]
     hayPoker = [x for x, c in contarNums.items() if c == 4]
     hayQuintillo = [x for x, c in contarNums.items() if c == 5]
@@ -24,31 +25,29 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
         listaEsc.append(x+2)
         listaEsc.append(x+3)
         listaEsc.append(x+4) 
-
-    jugadas = {}
-
-    if hayPar and hay2Par != 2:
-        jugadas["Par"] = (20 + sum(contarNums.keys())) * 2
-    if hay2Par == 2 and not hayFull:
-        jugadas["Doble Par"] = (25 + sum(contarNums.keys())) * 2
-    if hayTrio:
-        jugadas["Trio"] = (45 + sum(hayTrio)) * 3
-    if hayPoker:
-        jugadas["Poker"] = (80 + sum(hayPoker)) * 7
+        
     if hayQuintillo:
-        jugadas["Quintillo"] = (185 + sum(hayQuintillo)) * 16
-    if hayColor and not listaEsc:
-        jugadas["Color"] = (71 + sum(valores)) * 4
-    if hayFull:
-        jugadas["Full"] = (63 + sum(hayTrio)) * 4
-    if listaEsc and not hayColor:
-        jugadas["Escalera"] = (50 + sum(listaEsc)) * 4
-    if listaEsc and hayColor:
-        jugadas["Escalera de Color"] = (120 + sum(listaEsc)) * 8
-    jugadas["Carta Alta"] = (5 + max(valores))
-    nombreJugada = max(jugadas, key=jugadas.get)
-    valorJugadaDef = jugadas[nombreJugada]
+        return "Quintillo", ((185 + sum(hayQuintillo)) , 16) 
+    elif listaEsc and hayColor:
+        return "Escalera de Color", (120 + sum(listaEsc), 8)
+    elif hayPoker:
+        return "Poker", ((80 + sum(hayPoker)) , 7)
+    elif hayColor:
+        return "Color", ((71 + sum(valores)) , 4)
+    elif hayFull:
+        return "Full",((63 + sum(hayTrio) + sum(hayParList)) , 4)
+    elif listaEsc:
+        return "Escalera", ((50 + sum(listaEsc)) , 4)
+    elif hayTrio:
+        return "Trio", ((45 + sum(hayTrio)) , 3)
+    elif hay2Par:
+        return "Doble Par",((25 + sum(contarNums.keys())), 2)
+    elif hayPar:
+        return "Par" ,((20 + sum(contarNums.keys())) , 2)
+    else:
+        return "Carta Alta", (5 + max(valores))
+    
 
-    return (valorJugadaDef, nombreJugada)
 
-print(valoresDefault(manoJugada))
+manoJugada = [(3,"trebol"),(3,"diamante"),(1,"trebol"),(10,"trebol"),(10,"trebol")]
+print(valoresDefault(manoJugada)[1])
