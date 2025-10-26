@@ -1,32 +1,45 @@
-import Jugador
-import Jokers
-import cartas
+from clases import Jugador
+from clases import Jokers
+from clases import cartas
 
-class Ronda():
-
-    def __init__(self, mazo, roundFinalScore, Jugador):
-
-        self.__mazoOrigen__ = mazo 
+class Ronda:
+    def _init_(self, puntosActuales, puntosObjetivo,mazo,jugador, descartes, manosRestantes):
+        self.puntosActuales = 0
+        self.puntosObjetivo = puntosObjetivo
         self.mazo = mazo
-        self.discards = 4 
-        self.handsPlayed = 4
-        self.roundScore = 0
-        self.roundFinalScore = roundFinalScore
-        self.jugador = Jugador
-        self.mano = cartas.mano(self.mazo)
-
-
+        self.jugador = jugador
+        self.descartes = descartes
+        self.manosRestantes = manosRestantes
+     
+    def obtenerMazo(self):
+         return self.mazo
+         
+    def quedanManosParaJugar(self):
+         return self.manosRestantes > 0
+         
+    def ganaste(self):
+         return self.puntosActuales >= self.puntosObjetivo
+       
+    def tieneDescartes(self):
+         return self.descartes > 0
+     
+    def sumarPuntos(self, puntos):
+         self.puntosActuales += puntos
+     
+   
+def crearRonda(jugador,puntosObjetivo, mazo):
     
-    def descartar(self):
-        if self.discards <= 0:
-            print("Ya no te quedan descartes para esta ronda")
-            return
-        self.discards -= 1
-        print("¿Qué cartas querés descartar? Ingresá los índices separados por comas")
-        indices = input()
-        indicesList = indices.split(",")
-        indicesList = [int(i) for i in indicesList]
-        self.mano, self.mazo = cartas.descartarCartas(self.mano, self.mazo, indicesList)
+    if not mazo:       #si no le paso mazo, lo creo (es por si en algun momento modificamos el mazo pasarselo el modificado)
+        mazo = cartas.crearMazo()
+
+    descartes = 3 # en un principio son 3 dps ver si agregamos comodines habria que crear los comodines 
+                     # y crear un metodo que sume a los descartes estilo jokers.agregarDescartes
+
+    manosRestantes = 3 #tmb ver si son mas x comodines, etc
+       
+    ronda = Ronda(0, puntosObjetivo, mazo, jugador, descartes, manosRestantes)
+    return ronda
+       
 
 
 def iniciarPartida():
@@ -36,7 +49,6 @@ def iniciarPartida():
     ronda = Ronda(mazo, 300, jugador)
 
 
-# hay que ver como es la logica de la "apuesta", crear un diccionario de valores o alguna forma de 
-# identificar puntajes por cada juego de poker, manera de seleccionar las cartas q voy a "apostar"
-# (que disminuya el handsplayed), ver si el puntaje es mayor al buscado, capaz no deberia pertenecer a ronda. ver en general
-# como se va a jugar la partida en si.
+# mi idea es un metodo crearRonda que reciba el jugador, objetivo de puntos y mazo por si dps queremos agregar cartas al mazo y returne un obj tipo ronda
+# un metodo jugarRonda que reciba esa ronda y la juegue viendo los atributos que tiene usando metodos de la clase y te diga si perdiste o ganaste
+# y luego un main que cree las 3 o infinitas rondas.
