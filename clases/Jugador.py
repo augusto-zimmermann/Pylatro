@@ -19,4 +19,4 @@ class Jugador():
     def devolverJokers(self):       #devuelve la lista de jokers
         return self.jokers
 
-jugador1 = Jugador(4,cartas.cartas,listaJokers,1)
+jugador1 = Jugador(4,cartas.crearMazo(),listaJokers,1)

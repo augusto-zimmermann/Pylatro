@@ -33,7 +33,7 @@ class Ronda:
     def mostrarMano(self):
         cartas.mostrarMano(self.mano)
 
-    def obtenerJokers(self)
+    def obtenerJokers(self):
         return self.jugador.devolverJokers()            #deberia funcionar nose como relacionar los archivos
 
     def disminuirManosRestantes(self):
@@ -58,7 +58,7 @@ def crearRonda(jugador,puntosObjetivo, mazo):
     return ronda
        
 
-def jugarRonda(ronda->Ronda):
+def jugarRonda(ronda):
 
     copiaMazo = ronda.obtenerMazo()  #lo copio porque en la ronda se va a modificar y luego lo necesito para la proxima ronda.
 
@@ -74,11 +74,11 @@ def jugarRonda(ronda->Ronda):
             while opcion != "1" or opcion != "2":
                 print("desea \n1: descartar las cartas seleccionadas\n2:jugar las cartas seleccionadas")
                 opcion = input()[0]
-                if opcion == "1"
+                if opcion == "1":
                     seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())                  #uso la funcion seleccionar cartas, que te pide una lista de indices.
                     cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas) #si descarta las cartas, descarto y disminuyo los descartes restantes
                     ronda.disminuirDescartes()
-                elif opcion == "2"
+                elif opcion == "2":
                     seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
                     puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())        #si juega la mano sumo los puntos y disminuyo las manos jugadas restantes
                     ronda.sumarPuntos(puntosASumar)
@@ -103,15 +103,8 @@ def jugarRonda(ronda->Ronda):
 
     return ronda.ganaste()      #devuelve el booleano si gano para saber si jugare la proxima ronda o no 
             
-    
 
-def iniciarPartida():
-    
-    mazo = cartas.crearMazo()
-    jugador = Jugador.Jugador(mazo,4, Jugador.listaJokers,1)
-    ronda = Ronda(mazo,0, 300, jugador,4,4)
-    crearRonda(jugador,ronda.puntosObjetivo,mazo)
-iniciarPartida()
 # mi idea es un metodo crearRonda que reciba el jugador, objetivo de puntos y mazo por si dps queremos agregar cartas al mazo y returne un obj tipo ronda
 # un metodo jugarRonda que reciba esa ronda y la juegue viendo los atributos que tiene usando metodos de la clase y te diga si perdiste o ganaste
 # y luego un main que cree las 3 o infinitas rondas.
+
