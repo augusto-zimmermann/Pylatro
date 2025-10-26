@@ -14,4 +14,4 @@ class Jugador():
             print(f"Compraste el joker {joker.nombre}")
         else:
             print("No podés comprarlo amigo")
-jugador1 = Jugador(4,cartas.cartas,listaJokers,1)
+jugador1 = Jugador(4,cartas.crearMazo(),listaJokers,1)

@@ -1,10 +1,10 @@
-from clases import Jugador
-from clases import Jokers
-from clases import cartas
+import Jugador
+import Jokers
+import cartas
 
 class Ronda:
-    def _init_(self, puntosActuales, puntosObjetivo,mazo,jugador, descartes, manosRestantes):
-        self.puntosActuales = 0
+    def __init__(self, puntosActuales:0, puntosObjetivo,mazo,jugador, descartes, manosRestantes):
+        self.puntosActuales = puntosActuales
         self.puntosObjetivo = puntosObjetivo
         self.mazo = mazo
         self.jugador = jugador
@@ -45,10 +45,10 @@ def crearRonda(jugador,puntosObjetivo, mazo):
 def iniciarPartida():
     
     mazo = cartas.crearMazo()
-    jugador = Jugador(mazo,4, [])
-    ronda = Ronda(mazo, 300, jugador)
-
-
+    jugador = Jugador.Jugador(mazo,4, Jugador.listaJokers,1)
+    ronda = Ronda(mazo,0, 300, jugador,4,4)
+    crearRonda(jugador,ronda.puntosObjetivo,mazo)
+iniciarPartida()
 # mi idea es un metodo crearRonda que reciba el jugador, objetivo de puntos y mazo por si dps queremos agregar cartas al mazo y returne un obj tipo ronda
 # un metodo jugarRonda que reciba esa ronda y la juegue viendo los atributos que tiene usando metodos de la clase y te diga si perdiste o ganaste
 # y luego un main que cree las 3 o infinitas rondas.
