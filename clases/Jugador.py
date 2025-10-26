@@ -20,3 +20,4 @@ class Jugador():
         return self.jokers
 
 jugador1 = Jugador(4,cartas.cartas,listaJokers,1)
+jugador1 = Jugador(4,cartas.crearMazo(),listaJokers,1)
