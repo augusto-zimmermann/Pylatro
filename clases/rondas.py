@@ -10,6 +10,7 @@ class Ronda:
         self.jugador = jugador
         self.descartes = descartes
         self.manosRestantes = manosRestantes
+        self.mano = cartas.mano(mazo)
      
     def obtenerMazo(self):
          return self.mazo
@@ -20,11 +21,27 @@ class Ronda:
     def ganaste(self):
          return self.puntosActuales >= self.puntosObjetivo
        
-    def tieneDescartes(self):
+    def quedanDescartes(self):
          return self.descartes > 0
      
     def sumarPuntos(self, puntos):
          self.puntosActuales += puntos
+
+    def obtenerMano(self):
+        return self.mano
+
+    def mostrarMano(self):
+        cartas.mostrarMano(self.mano)
+
+    def obtenerJokers(self)
+        return self.jugador.devolverJokers()            #deberia funcionar nose como relacionar los archivos
+
+    def disminuirManosRestantes(self):
+        self.manosRestantes -= 1
+
+    def disminuirDescartes(self):
+        self.descartes -=1
+
      
    
 def crearRonda(jugador,puntosObjetivo, mazo):
@@ -41,6 +58,52 @@ def crearRonda(jugador,puntosObjetivo, mazo):
     return ronda
        
 
+def jugarRonda(ronda->Ronda):
+
+    copiaMazo = ronda.obtenerMazo()  #lo copio porque en la ronda se va a modificar y luego lo necesito para la proxima ronda.
+
+    while ronda.quedanManosParaJugar() and not ronda.ganaste(): #si no ganaste y quedan manos para jugar te pregunta que hacer
+        
+        ronda.mostrarMano()
+
+        if  ronda.quedanDescartes():        #si quedan descartes le ofrece las dos opciones
+            print("seleccione cartas por indice hasta 5, separadas por comas, para descartarlas o jugar la mano")
+            seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
+            opcion = "todavia sin ingresar"
+
+            while opcion != "1" or opcion != "2":
+                print("desea \n1: descartar las cartas seleccionadas\n2:jugar las cartas seleccionadas")
+                opcion = input()[0]
+                if opcion == "1"
+                    seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())                  #uso la funcion seleccionar cartas, que te pide una lista de indices.
+                    cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas) #si descarta las cartas, descarto y disminuyo los descartes restantes
+                    ronda.disminuirDescartes()
+                elif opcion == "2"
+                    seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
+                    puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())        #si juega la mano sumo los puntos y disminuyo las manos jugadas restantes
+                    ronda.sumarPuntos(puntosASumar)
+                    ronda.disminuirManosRestantes()
+                    cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas)
+                else:
+                    print("intentelo de nuevo con una opcion posible")
+
+        else:               #si no quedan descartes solo puede jugar la mano
+            print("seleccione cartas por indice hasta 5, separadas por comas, para jugar la mano")
+            seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
+            puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())
+            ronda.sumarPuntos(puntosASumar)
+            ronda.disminuirManosRestantes()
+            cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas)
+            
+
+    if ronda.ganaste():
+        print("¡Has ganado la ronda!")      #imprime si gano o pierdo la ronda
+    else:                                                           
+        print("No te quedan manos. Has perdido la ronda.")
+
+    return ronda.ganaste()      #devuelve el booleano si gano para saber si jugare la proxima ronda o no 
+            
+    
 
 def iniciarPartida():
     

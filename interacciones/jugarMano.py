@@ -1,7 +1,8 @@
 import tablaValores as tabla
 #jugada se refiere a la manoJugada = (3, trebol), (4, diamante)... etc
+#devuelve el valor final de la mano jugada con los jokers aplicados a la mano
 
-def valorFinal(manoJugada,jokersList):
+def JugarMano(manoJugada,jokersList):
     #jugada = [(1,)]
     valorFinal = 0
     chipsMano = tabla.valoresDefault(manoJugada)[1][0]
