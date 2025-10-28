@@ -77,6 +77,7 @@ def jugarRonda(ronda:Ronda):
         if  ronda.quedanDescartes():        #si quedan descartes le ofrece las dos opciones
             print("seleccione cartas por indice hasta 5, separadas por comas, para descartarlas o jugar la mano")
             seleccionadas = cartas.seleccionarCartas(ronda.obtenerMano())
+            print(seleccionadas)
             opcion = "todavia sin ingresar"
 
             while opcion[0] != "1" and opcion[0] != "2": # opcion = 1, x = false, y = true

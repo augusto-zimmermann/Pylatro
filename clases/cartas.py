@@ -53,7 +53,7 @@ def seleccionarCartas(mano):
     indicesSeleccionados = []
     for numero in numerosStr:
         try: 
-            nro = int(numero)
+            nro = int(numero)-1
             indicesSeleccionados.append(nro) 
         except ValueError as e:                # le resto 1 porque los indices empiezan en 1 en la mano
             print("error de valor", e)
