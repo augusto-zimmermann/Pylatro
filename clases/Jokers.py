@@ -1,5 +1,3 @@
-import cartas
-mano = cartas.mano(cartas.crearMazo())
 
 class Joker():
     def __init__(self,nombre:str,multiplicadorAnadir:int,chips:int,precio:int,multiplicador:int):

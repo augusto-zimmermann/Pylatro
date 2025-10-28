@@ -24,7 +24,7 @@ def mano(mazo):
         random = numpy.random.randint(1,(len(mazo)))
         manoList.append(mazo[random])
         mazo.remove(mazo[random])
-    print(manoList)
+   
     return manoList
 
 # le pasas un mazo y lo recarga al normal por si le faltan cartas.
@@ -40,7 +40,7 @@ def recargarMazo(mazo):
 #ej: 1: (3, trebol) 2: (7, corazones), 3: (1, picas) ... para luego el usuario seleccione las cartas por indice 
 
 def mostrarMano(mano):
-    for i in range(mano):
+    for i in range(len(mano)):
         print(f"{i+1}: {mano[i]}")    
 
 # le pasas una mano, el mazo y las cartas a descartar (lista de indices) y te las descarta de la mano
@@ -48,22 +48,31 @@ def mostrarMano(mano):
 # se va a usar tanto cuando jugas como cuando descartas las cartas ya que luego de jugarlas tambien se "descartan del mazo"
 
 def seleccionarCartas(mano):
-    imputUsuario = input()
-    indicesSeleccionados = [int(x)-1 for x in imputUsuario.split(",")]               # le resto 1 porque los indices empiezan en 1 en la mano
-    indicesSeleccionados =  indicesSeleccionados[:5]                                 # toma hasta 5 cartas seleccionadas si hay menos toma menos
-    seleccion = [mano[seleccionada] for seleccionada in indicesSeleccionadas]         # devuelvo una lista con las cartas seleccionadas
+    inputUsuario = input()
+    numerosStr = inputUsuario.split(",")
+    indicesSeleccionados = []
+    for numero in numerosStr:
+        try: 
+            nro = int(numero)
+            indicesSeleccionados.append(nro) 
+        except ValueError as e:                # le resto 1 porque los indices empiezan en 1 en la mano
+            print("error de valor", e)
+        
+    
+    indicesSeleccionados2 =  indicesSeleccionados[:5]                                 # toma hasta 5 cartas seleccionadas si hay menos toma menos
+    seleccion = [mano[i] for i in indicesSeleccionados2 if 0 <= i < len(mano)]         # devuelvo una lista con las cartas seleccionadas
     return seleccion
 
 
-def DescartarCartas(mano,mazo,cartasSeleccionadas):
-    for carta in cartasSeleccionadas:
-        mano.remove(mano[carta])
-      
+def descartarCartas(mano,mazo,seleccionados):
+    for i in seleccionados:
+        print("intento remover 1")
+        mano.remove(i)
+        print("removi?")
     #las cartas descartadas se reponen con nuevas cartas del mazo, y son eliminadas del mismo
         
-    for i in range(len(cartasSeleccionadas)):
+    for i in range(len(seleccionados)): 
         random = numpy.random.randint(1,(len(mazo)))
         mano.append(mazo[random])
         mazo.remove(mazo[random])
-
     return mano, mazo 

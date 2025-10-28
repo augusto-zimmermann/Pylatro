@@ -1,16 +1,16 @@
-import Jugador
-import Jokers
-import cartas
-
+from . import Jugador
+from . import Jokers
+from . import cartas
+from interacciones import jugarMano
 class Ronda:
-    def __init__(self, puntosActuales:0, puntosObjetivo,mazo,jugador, descartes, manosRestantes):
+    def __init__(self, puntosActuales:0, puntosObjetivo,mazo,jugador, descartes, manosRestantes,manoInicial):
         self.puntosActuales = puntosActuales
         self.puntosObjetivo = puntosObjetivo
         self.mazo = mazo
         self.jugador = jugador
         self.descartes = descartes
         self.manosRestantes = manosRestantes
-        self.mano = cartas.mano(mazo)
+        self.mano = manoInicial
      
     def obtenerMazo(self):
          return self.mazo
@@ -33,8 +33,8 @@ class Ronda:
     def mostrarMano(self):
         cartas.mostrarMano(self.mano)
 
-    def obtenerJokers(self):
-        return self.jugador.devolverJokers()            #deberia funcionar nose como relacionar los archivos
+    def obtenerJugador(self):
+        return self.jugador           #deberia funcionar nose como relacionar los archivos
 
     def disminuirManosRestantes(self):
         self.manosRestantes -= 1
@@ -42,23 +42,31 @@ class Ronda:
     def disminuirDescartes(self):
         self.descartes -=1
 
+    def cambiarMano(self, mano):
+        self.mano = mano 
+
+    def cambiarMazo(self,mazo):
+        self.mazo = mazo
      
-   
 def crearRonda(jugador,puntosObjetivo, mazo):
+
+    
     
     if not mazo:       #si no le paso mazo, lo creo (es por si en algun momento modificamos el mazo pasarselo el modificado)
         mazo = cartas.crearMazo()
+
+    mano = cartas.mano(mazo)
 
     descartes = 3 # en un principio son 3 dps ver si agregamos comodines habria que crear los comodines 
                      # y crear un metodo que sume a los descartes estilo jokers.agregarDescartes
 
     manosRestantes = 3 #tmb ver si son mas x comodines, etc
        
-    ronda = Ronda(0, puntosObjetivo, mazo, jugador, descartes, manosRestantes)
+    ronda = Ronda(0, puntosObjetivo, mazo, jugador, descartes, manosRestantes,mano)
     return ronda
        
 
-def jugarRonda(ronda):
+def jugarRonda(ronda:Ronda):
 
     copiaMazo = ronda.obtenerMazo()  #lo copio porque en la ronda se va a modificar y luego lo necesito para la proxima ronda.
 
@@ -68,19 +76,22 @@ def jugarRonda(ronda):
 
         if  ronda.quedanDescartes():        #si quedan descartes le ofrece las dos opciones
             print("seleccione cartas por indice hasta 5, separadas por comas, para descartarlas o jugar la mano")
-            seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
+            seleccionadas = cartas.seleccionarCartas(ronda.obtenerMano())
             opcion = "todavia sin ingresar"
 
-            while opcion != "1" or opcion != "2":
+            while opcion[0] != "1" and opcion[0] != "2": # opcion = 1, x = false, y = true
                 print("desea \n1: descartar las cartas seleccionadas\n2:jugar las cartas seleccionadas")
-                opcion = input()[0]
-                if opcion == "1":
-                    seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())                  #uso la funcion seleccionar cartas, que te pide una lista de indices.
-                    cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas) #si descarta las cartas, descarto y disminuyo los descartes restantes
+                opcion = input()
+
+                if opcion[0] == "1":                  #uso la funcion seleccionar cartas, que te pide una lista de indices.
+                    
+                    manoNueva, mazoNuevo = cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas) #si descarta las cartas, descarto y disminuyo los descartes restantes
+                    ronda.cambiarMano(manoNueva)
+                    ronda.cambiarMazo(mazoNuevo)
                     ronda.disminuirDescartes()
-                elif opcion == "2":
-                    seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
-                    puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())        #si juega la mano sumo los puntos y disminuyo las manos jugadas restantes
+
+                elif opcion[0] == "2":
+                    puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJugador().obtenerJokers())        #si juega la mano sumo los puntos y disminuyo las manos jugadas restantes
                     ronda.sumarPuntos(puntosASumar)
                     ronda.disminuirManosRestantes()
                     cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas)
@@ -89,7 +100,7 @@ def jugarRonda(ronda):
 
         else:               #si no quedan descartes solo puede jugar la mano
             print("seleccione cartas por indice hasta 5, separadas por comas, para jugar la mano")
-            seleccionadas = cartas.seleccionarCartas(ronda.devolverMano())
+            seleccionadas = cartas.seleccionarCartas(ronda.obtenerMano())
             puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())
             ronda.sumarPuntos(puntosASumar)
             ronda.disminuirManosRestantes()
