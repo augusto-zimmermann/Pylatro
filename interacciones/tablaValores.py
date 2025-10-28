@@ -47,7 +47,3 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
     else:
         return "Carta Alta", (5 + max(valores))
     
-
-
-manoJugada = [(3,"trebol"),(3,"diamante"),(1,"trebol"),(10,"trebol"),(10,"trebol")]
-print(valoresDefault(manoJugada)[1])
