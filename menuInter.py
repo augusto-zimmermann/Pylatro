@@ -2,6 +2,9 @@ from clases import Jugador
 from clases import Jokers as j
 import numpy as np
 def menuInter(jokers):
+  print("======================================")
+  print("Menú compras")
+  print("======================================")
   print("Elije que joker comprar")
   salir = "N"
   salir = input("Desea salir? Y/N")
@@ -42,5 +45,4 @@ def menuInter(jokers):
       print("Presionaste otra tecla no deseada")
     salir = input("Desea salir? Y/N")
 
-menuInter(j.listaJokersTotal)
 

@@ -16,16 +16,20 @@ class Ronda:
          return self.mazo
          
     def quedanManosParaJugar(self):
+         print(f"Te quedan {self.manosRestantes} manos restantes")
          return self.manosRestantes > 0
          
     def ganaste(self):
          return self.puntosActuales >= self.puntosObjetivo
        
     def quedanDescartes(self):
+         print(f"Te quedan {self.descartes} descartes")
          return self.descartes > 0
      
     def sumarPuntos(self, puntos):
          self.puntosActuales += puntos
+         print(f"los puntos actuales son: {self.puntosActuales}")
+         print(f"los puntos a alcanzar son: {self.puntosObjetivo}")
 
     def obtenerMano(self):
         return self.mano
@@ -67,7 +71,6 @@ def crearRonda(jugador,puntosObjetivo, mazo):
        
 
 def jugarRonda(ronda:Ronda):
-
     copiaMazo = ronda.obtenerMazo()  #lo copio porque en la ronda se va a modificar y luego lo necesito para la proxima ronda.
 
     while ronda.quedanManosParaJugar() and not ronda.ganaste(): #si no ganaste y quedan manos para jugar te pregunta que hacer
@@ -110,7 +113,7 @@ def jugarRonda(ronda:Ronda):
 
     if ronda.ganaste():
         print("¡Has ganado la ronda!")      #imprime si gano o pierdo la ronda
-    else:                                                           
+    else:                                                         
         print("No te quedan manos. Has perdido la ronda.")
 
     return ronda.ganaste()      #devuelve el booleano si gano para saber si jugare la proxima ronda o no 

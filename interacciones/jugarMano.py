@@ -53,6 +53,7 @@ def valoresDefault(manoJugada): #mano jugada: [(1,"trebol"),(2,"diamantes")]
 
 def jugarMano(manoJugada,jokersList):
     #jugada = [(1,)]
+    print(manoJugada)
     valorFinal = 0
     chipsMano = valoresDefault(manoJugada)[1][0]
     multiMano = valoresDefault(manoJugada)[1][1]

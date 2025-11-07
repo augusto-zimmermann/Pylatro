@@ -10,9 +10,12 @@ class Jugador():
             self.jokers.append(joker)
             self.dinero -= joker.precio
             print(f"Compraste el joker {joker.nombre}")
+            print(self.jokers)
         else:
             print("No podés comprarlo amigo")
 
     def obtenerJokers(self):       #devuelve la lista de jokers
         return self.jokers
 
+listaJokers = []
+jugador1 = Jugador(4,listaJokers,1)
