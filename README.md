@@ -1,6 +1,6 @@
 # Pylatro
 
-![Pylatro](/media/img/pylatro.png)
+![Pylatro](/media/img/Pylatro.jpeg)
 
 Pylatro es una adaptación de [Balatro](https://store.steampowered.com/app/2379780/Balatro/), un popular juego de cartas roguelike creado por un solo desarrollador.
 
