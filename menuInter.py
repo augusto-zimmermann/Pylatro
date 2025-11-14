@@ -5,9 +5,9 @@ def menuInter(jokers):
   print("======================================")
   print("Menú compras")
   print("======================================")
-  print("Elije que joker comprar")
+  print(f"JOKERS DISPONIBLES, DINERO ACTUAL:")
+  print("======================================")
   salir = "N"
-  salir = input("Desea salir? Y/N")
   jokerRandom = np.random.randint(0,len(jokers))
   jokerRandom2 = np.random.randint(0,len(jokers))
   comprado = [False,False]
@@ -16,15 +16,17 @@ def menuInter(jokers):
     def joker1(comprado):
       if comprado == False:
         print("Joker 1")
-        print(jokers[jokerRandom].nombre)
-        print(jokers[jokerRandom].precio)
+        print(f"Nombre:{jokers[jokerRandom].nombre}")
+        print(f"Precio:{jokers[jokerRandom].precio}")
         print(jokers[jokerRandom].descripcion())
+        print("======================================")
     def joker2(comprado):
       if comprado == False:
         print("Joker 2")
-        print(jokers[jokerRandom2].nombre)
-        print(jokers[jokerRandom2].precio)
+        print(f"Nombre:{jokers[jokerRandom2].nombre}")
+        print(f"Precio:{jokers[jokerRandom2].precio}")
         print(jokers[jokerRandom2].descripcion())
+        print("======================================")
     joker1(comprado[0])
     joker2(comprado[1])
     print("Que joker desea comprar?")

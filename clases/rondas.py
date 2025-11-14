@@ -16,14 +16,12 @@ class Ronda:
          return self.mazo
          
     def quedanManosParaJugar(self):
-         print(f"Te quedan {self.manosRestantes} manos restantes")
          return self.manosRestantes > 0
          
     def ganaste(self):
          return self.puntosActuales >= self.puntosObjetivo
        
     def quedanDescartes(self):
-         print(f"Te quedan {self.descartes} descartes")
          return self.descartes > 0
      
     def sumarPuntos(self, puntos):
@@ -77,6 +75,8 @@ def jugarRonda(ronda:Ronda):
         
         ronda.mostrarMano()
 
+        print(f"Manos restantes: {ronda.manosRestantes}, descartes restantes: {ronda.descartes}")
+        
         if  ronda.quedanDescartes():        #si quedan descartes le ofrece las dos opciones
             print("seleccione cartas por indice hasta 5, separadas por comas, para descartarlas o jugar la mano")
             seleccionadas = cartas.seleccionarCartas(ronda.obtenerMano())
@@ -105,7 +105,7 @@ def jugarRonda(ronda:Ronda):
         else:               #si no quedan descartes solo puede jugar la mano
             print("seleccione cartas por indice hasta 5, separadas por comas, para jugar la mano")
             seleccionadas = cartas.seleccionarCartas(ronda.obtenerMano())
-            puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJokers())
+            puntosASumar = jugarMano.jugarMano(seleccionadas, ronda.obtenerJugador().obtenerJokers())
             ronda.sumarPuntos(puntosASumar)
             ronda.disminuirManosRestantes()
             cartas.descartarCartas(ronda.obtenerMano(), ronda.obtenerMazo(), seleccionadas)

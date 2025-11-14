@@ -21,8 +21,8 @@ while vivo == True:
       print(f"FINAL BLIND")
     print("=========================================")
     rondaActual = rondas.crearRonda(j.jugador1,puntos,False)
-    print(f"puntos a alcanzar: {puntos}")
-    print(j.jugador1.jokers)
+    print(f"Puntos a alcanzar: {puntos}")
+    print(f"Lista de Jokers:{j.jugador1.mostrarJokers()}")
 
     rondas.jugarRonda(rondaActual)
     if rondaActual.ganaste():

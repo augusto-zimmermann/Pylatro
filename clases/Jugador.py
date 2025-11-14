@@ -14,7 +14,10 @@ class Jugador():
         else:
             print("No podés comprarlo amigo")
 
-    def obtenerJokers(self):       #devuelve la lista de jokers
+    def mostrarJokers(self):       #devuelve la lista de jokers
+        return [joker.nombre for joker in self.jokers]
+
+    def obtenerJokers(self):
         return self.jokers
 
 listaJokers = []

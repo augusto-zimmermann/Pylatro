@@ -66,9 +66,7 @@ def seleccionarCartas(mano):
 
 def descartarCartas(mano,mazo,seleccionados):
     for i in seleccionados:
-        print("intento remover 1")
         mano.remove(i)
-        print("removi?")
     #las cartas descartadas se reponen con nuevas cartas del mazo, y son eliminadas del mismo
         
     for i in range(len(seleccionados)): 
