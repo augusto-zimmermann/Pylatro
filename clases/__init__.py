@@ -1,0 +1,1 @@
+#init hace que los proximos archivos se puedan importar entre si medio extraño preguntar a chatgpt
