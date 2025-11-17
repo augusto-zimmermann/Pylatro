@@ -16,8 +16,15 @@ Es una de las principales mecánicas del juego, que sea estilo roguelike signifi
 
 Para jugar a Pylatro, necesitás conocer primero ciertos conceptos del poker:
 
-- Jugás con una baraja de cartas inglesas, que tiene cartas del 1 al 10, así como J (11), Q (12) y K (13)
-- Cada una de estas cartas pertenece a un palo: picas, treboles, diamantes o corazones
+- Jugás con una baraja de cartas inglesas, que tiene cartas del 1 al 10, así como:
+  - J (11)
+  - Q (12)
+  - K (13)
+- Cada una de estas cartas pertenece a un palo:
+  - Picas
+  - Treboles
+  - Diamantes
+  - Corazones
 
 Ahora sí, la escencia de Pylatro:
 
@@ -29,6 +36,9 @@ Ahora sí, la escencia de Pylatro:
 > Tené en cuenta que tenés una cantidad limitada de manos y de descartes por ronda
 
 *Che pero, por que querría descartar cartas? De qué me sirve?*
+
+> [!TIP]
+> Descartar cartas es clave para encontrar una mejor mano para jugar y tener más chances de ganar.
 
 ### Manos de Poker
 
@@ -82,4 +92,5 @@ Los podés encontrar en la tienda después de cada ronda.
 
 El objetivo del juego es ganarle a la máquina, que pide una cantidad determinada de fichas para poder pasar al siguiente nivel.
 
+> [!CAUTION]
 > Si no te queda ninguna mano y no superaste la cantidad de fichas, gg
