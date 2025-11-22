@@ -1,24 +1,28 @@
+from typing import List
 
-class Jugador():
-    def __init__(self,dinero,jokers:list,nivel):
-        self.dinero = dinero
-        self.jokers = jokers
-        self.nivel = nivel
+from jokers import Joker
 
-    def comprar_joker(self,joker):
-        if self.dinero >= joker.precio:
-            self.jokers.append(joker)
-            self.dinero -= joker.precio
-            print(f"Compraste el joker {joker.nombre}")
-            print(self.jokers)
-        else:
-            print("No podés comprarlo amigo")
 
-    def mostrarJokers(self):       #devuelve la lista de jokers
-        return [joker.nombre for joker in self.jokers]
+class JugadorModel:
+    def __init__(self):
+        self.dinero: int = 0
+        self.jokers: List[Joker] = []
+        self.nivel: int = 1
 
-    def obtenerJokers(self):
+    def comprar_joker(self, joker: Joker):
+        if len(self.jokers) >= 5:
+            return False, "Máximo de jokers alcanzado (5)."
+        if self.dinero < joker.precio:
+            return False, "No tenés suficiente dinero."
+        self.jokers.append(joker)
+        self.dinero -= joker.precio
+        return True, f"Compraste {joker.nombre}."
+
+    def mostrarJokers(self) -> List[str]:
+        return [j.nombre for j in self.jokers]
+
+    def obtenerJokers(self) -> List[Joker]:
         return self.jokers
 
-listaJokers = []
-jugador1 = Jugador(4,listaJokers,1)
+
+Jugador = JugadorModel
