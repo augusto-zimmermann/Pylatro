@@ -1,6 +1,6 @@
 from typing import List
 
-from jokers import Joker
+from .Jokers import Joker
 
 
 class JugadorModel:

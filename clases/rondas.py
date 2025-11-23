@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
-from cartas import crearMazo, mano
-from jugador import JugadorModel
+from .cartas import crearMazo, mano
+from .Jugador import JugadorModel
 
 
 

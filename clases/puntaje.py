@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from jokers import Joker
+from .Jokers import Joker
 
 def valoresDefault(manoJugada: List[Tuple[int, str]]):
     if not manoJugada:

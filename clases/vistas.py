@@ -3,8 +3,8 @@ from typing import List, Tuple, Optional
 
 import pygame
 
-from cartas import MAX_SELECCION
-from puntaje import valoresDefault
+from .cartas import MAX_SELECCION
+from .puntaje import valoresDefault
 
 
 # Config visual / constantes
